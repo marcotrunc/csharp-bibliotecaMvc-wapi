@@ -1,0 +1,102 @@
+﻿@model csharp_bibliotecaMvc.Models.ViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Libro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateLibro" asp-controller="ModelView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="libro.Titolo" class="control-label"></label>
+                <input asp-for="libro.Titolo" class="form-control" />
+                <span asp-validation-for="libro.Titolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="libro.Anno" class="control-label"></label>
+                <input asp-for="libro.Anno" class="form-control" />
+                <span asp-validation-for="libro.Anno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="libro.Stato" class="control-label"></label>
+                <input asp-for="libro.Stato" class="form-control" />
+                <span asp-validation-for="libro.Stato" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="libro.ISBN" class="control-label"></label>
+                <input asp-for="libro.ISBN" class="form-control" />
+                <span asp-validation-for="libro.ISBN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="libro.Autore" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example" asp-for="libro.Autore">
+                    @foreach(var a in ViewBag.Autori)
+                    {
+                        <option value="@a.AutoreID">@a.Cognome @a.Nome</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Aggiungi autore
+                </button>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form-->
+        <form asp-action="CreateAuthor">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="autore.Nome" class="control-label"></label>
+                <input asp-for="autore.Nome" class="form-control" />
+                <span asp-validation-for="autore.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="autore.Cognome" class="control-label"></label>
+                <input asp-for="autore.Cognome" class="form-control" />
+                <span asp-validation-for="autore.Cognome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="autore.Email" class="control-label"></label>
+                <input asp-for="autore.Email" class="form-control" />
+                <span asp-validation-for="autore.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
